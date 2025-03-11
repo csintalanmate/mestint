@@ -55,6 +55,22 @@ class kancso_prolema:
         return gyerekek
 
 
+    def rakovetkezo2(self, a):
+        lim = self.MAX1, self.MAX2, self.MAX3
+        gyerekek = []
+        for i in range(0,3):
+            for j in range(0,3):
+                if i != j and a[i] != 0 and a[j] != lim[j]:
+                    T = min(a[i], lim[j] - a[j])
+                    uj_allapot = list(a)
+                    uj_allapot[i] = uj_allapot[i] - T
+                    uj_allapot[j] = uj_allapot[j] + T
+                    gyerekek.append(f"{i}->{j}", tuple(uj_allapot))
+                    
+        
+        return gyerekek
+
+
 
 if __name__ == "__main__":
     kancso = kancso_prolema((0,0,8),4)
