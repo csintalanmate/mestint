@@ -8,13 +8,31 @@ class Hanoi:
         return allapot == self.cel
 
 
-    def rakovetkezo(self, allapot):
+    def rakovetkezo(self, a):
         gyerekek = []
 
         for melyiket in range(0,3):
             for hova in ['P', 'Q', 'R']:
+                alkalmazhato = True
+                if a[melyiket] != hova:
+                    for i in range(0, melyiket):
+                        if a[i] != a[melyiket] and a[i] != hova:
+                            pass                #üres utasítás
+                        else:
+                            alkalmazhato = False
+                            break
+                else:
+                    alkalmazhato = False
+
+                if alkalmazhato:
+                    tmp = list(a)
+                    tmp[melyiket] = hova
+                    uj_allapot = tuple(tmp)
+                    gyerekek.append(("operator", uj_allapot))
+                    #gyerekek.append((f"{melyiket}->{hova}", uj_allapot))               ez a hazi
 
 
+        return gyerekek
 
 
 
