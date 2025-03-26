@@ -1,18 +1,21 @@
 #3 kancsó probléma
-class kancso_prolema:
+from keres import *
+
+
+class kancso_prolema(Feladat):
     def __init__(self, ke, c):
-        self.kezdo = ke
-        self.cel = c
+        self.kezdő = ke
+        self.cél = c
         self.MAX1 = 3
         self.MAX2 = 5
         self.MAX3 = 8
 
 
-    def celteszt(self, a):
-        return a[1] == self.cel or a[2] == self.cel
+    def célteszt(self, a):
+        return a[1] == self.cél or a[2] == self.cél
 
 
-    def rakovetkezo(self, a):
+    def rákövetkező(self, a):
         a1,a2,a3 = a
         gyerekek = []
 
@@ -54,23 +57,27 @@ class kancso_prolema:
 
         return gyerekek
 
-
-    def rakovetkezo2(self, a):
+    def rákövetkező2(self, a):
         lim = self.MAX1, self.MAX2, self.MAX3
         gyerekek = []
-        for i in range(0,3):
-            for j in range(0,3):
+        for i in range(0, 3):
+            for j in range(0, 3):
                 if i != j and a[i] != 0 and a[j] != lim[j]:
                     T = min(a[i], lim[j] - a[j])
-                    uj_allapot = list(a)
-                    uj_allapot[i] = uj_allapot[i] - T
-                    uj_allapot[j] = uj_allapot[j] + T
-                    gyerekek.append(f"{i}->{j}", tuple(uj_allapot))
-                    
-        
+                    tmp = list(a)
+                    tmp[i] = tmp[i] - T
+                    tmp[j] = tmp[j] + T
+                    uj_allapot = tuple(tmp)
+                    gyerekek.append((f"{i}->{j}", uj_allapot))
+
         return gyerekek
 
 
 
 if __name__ == "__main__":
     kancso = kancso_prolema((0,0,8),4)
+    csúcs = szélességi_fakereső(kancso)
+    út = csúcs.út()
+    út.reverse()
+    print(út)
+    print(csúcs.megoldás())
